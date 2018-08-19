@@ -8,7 +8,7 @@ protected:
 	sf::RectangleShape shape;
 	sf::Vector2f position;
 public:
-	SceneObject(const sf::Vector2f& position = { 0, 0 }, const sf::Vector2f& size = { 10, 10 });
+	SceneObject(const sf::Vector2f& position = { 0, 0 }, const sf::Vector2f& size = { 20, 20 });
 	~SceneObject() {};
 
 	sf::Vector2f getPosition() const;

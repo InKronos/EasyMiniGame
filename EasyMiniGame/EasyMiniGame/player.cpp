@@ -1,21 +1,14 @@
-#include "player.h"
+#include "stdafx.h"
 
 Player::Player()
 {
 
 }
 
-Player::Player(const sf::Vector2f & position, const sf::Vector2f & size, const float & playerSpeed)
+Player::Player(const sf::Vector2f & position, const sf::Vector2f& size)
+	: SceneObject(position, size)
 {
-	this->shape.setPosition(position);
-	this->shape.setSize(size);
-	this->shape.setFillColor(sf::Color::Magenta);
-	this->playerSpeed = playerSpeed;
-}
-
-void Player::update(const float & deltaTime)
-{
-	playerKeyboard();
+	this->shape.setFillColor({ 255, 0, 0 });
 }
 
 Player::~Player()
@@ -23,18 +16,14 @@ Player::~Player()
 	std::cout << "Player just got deleted!" << std::endl;
 }
 
-void Player::playerKeyboard()
+void Player::update(const float & deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		this->position.x -= playerSpeed;
-		this->shape.setPosition(this->position);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		this->position.x += playerSpeed;
-		this->shape.setPosition(this->position);
-	}
+	if (Game::isAPressed) 
+		this->position.x -= 50 * deltaTime;
+	if (Game::isDPressed)
+		this->position.x += 50 * deltaTime;
+
+	this->shape.setPosition(this->position);
 }
 
 void Player::playerCheckCollision(sf::RenderWindow& window)
