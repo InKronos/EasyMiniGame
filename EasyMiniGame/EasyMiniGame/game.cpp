@@ -4,6 +4,7 @@ bool Game::isAPressed(0),
 	Game::isDPressed(0);
 
 Player player({50, 200});
+FallingObject object({ 0,0 });
 
 Game::Game()
 {
@@ -85,10 +86,12 @@ void Game::events()
 void Game::updateAll(const float & deltaTime)
 {
 	player.update(deltaTime);
+	object.update(deltaTime);
 }
 
 
 void Game::drawAll(sf::RenderWindow& window)
 {
 	player.draw(window);
+	object.draw(window);
 }
