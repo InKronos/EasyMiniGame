@@ -1,5 +1,10 @@
 #include "stdafx.h"
 
+bool Game::isAPressed(0),
+	Game::isDPressed(0);
+
+Player player({50, 200});
+
 Game::Game()
 {
 	std::cout << "Size and title not specified!" << std::endl;
@@ -8,7 +13,7 @@ Game::Game()
 Game::Game(const int & windowWidth, const int & windowHeight, const sf::String & windowTitle)
 	: window(sf::VideoMode(windowWidth, windowHeight), windowTitle)
 {
-	window.setFramerateLimit(30);
+	
 }
 
 Game::~Game()
@@ -18,42 +23,72 @@ Game::~Game()
 
 void Game::run()
 {
+	sf::Clock gameClock;
+	float deltaTime = 1 / 60.f;
+	this->window.setFramerateLimit(30);
+
 	while (this->window.isOpen())
 	{
+		float frameStart = gameClock.getElapsedTime().asSeconds();
+
 		events();
-		update();
-		draw();
+		updateAll(deltaTime);
+		this->window.clear();
+		drawAll(this->window);
+		this->window.display();
+		deltaTime = (gameClock.getElapsedTime().asSeconds() - frameStart) * 10;
 	}
 }
 
 void Game::events()
 {
-	sf::Event evnt;
+	sf::Event event;
 
-	while (this->window.pollEvent(evnt))
+	while (this->window.pollEvent(event))
 	{
-		if (evnt.type == sf::Event::Closed)
+
+		if (event.type == sf::Event::Closed)
 		{
 			this->window.close();
 			std::cout << "You just closed the window!" << std::endl;
 		}
-		if (evnt.type == sf::Event::Resized)
+
+		if (event.type == sf::Event::Resized)
 		{
 			std::cout << "New width is " << this->window.getSize().x << ", new height is " << this->window.getSize().y << std::endl;
+		}
+
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::A) {
+				isAPressed = true;
+			}
+				
+			if (event.key.code == sf::Keyboard::D)
+			{
+				isDPressed = true;
+			}
+				
+		}
+
+		if (event.type == sf::Event::KeyReleased)
+		{
+			if (event.key.code == sf::Keyboard::A)
+				isAPressed = false;
+			if (event.key.code == sf::Keyboard::D)
+				isDPressed = false;
 		}
 	}
 
 }
 
-void Game::update()
+void Game::updateAll(const float & deltaTime)
 {
+	player.update(deltaTime);
 }
 
 
-void Game::draw()
+void Game::drawAll(sf::RenderWindow& window)
 {
-	this->window.clear();
-
-	this->window.display();
-
+	player.draw(window);
 }

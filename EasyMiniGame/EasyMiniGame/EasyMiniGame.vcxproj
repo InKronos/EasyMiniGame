@@ -146,11 +146,13 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

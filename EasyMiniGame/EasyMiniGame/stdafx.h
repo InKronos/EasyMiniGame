@@ -12,3 +12,4 @@
 
 #include "game.h"
 #include "SceneObject.h"
+#include "player.h"

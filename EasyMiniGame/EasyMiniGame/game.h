@@ -8,13 +8,15 @@ private:
 	sf::RenderWindow window;
 public:
 	Game();
-	Game(const int & windowWidth, const int & windowHeight, const sf::String & windowName);
+	Game(const int & windowWidth = 500, const int & windowHeight = 500, const sf::String & windowName = "SFML GAME!");
 	~Game();
 	void run();
+	static bool isAPressed,
+		isDPressed;
 
 private:
 	void events();
-	void update();
-	void draw();
+	void updateAll(const float & deltaTime);
+	void drawAll(sf::RenderWindow& window);
 
 };
