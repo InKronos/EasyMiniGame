@@ -11,3 +11,4 @@
 #include <SFML/Graphics.hpp>
 
 #include "game.h"
+#include "SceneObject.h"
