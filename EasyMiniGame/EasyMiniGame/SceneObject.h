@@ -4,7 +4,7 @@
 
 class SceneObject
 {
-private:
+protected:
 	sf::RectangleShape shape;
 	sf::Vector2f position;
 public:

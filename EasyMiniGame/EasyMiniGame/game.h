@@ -8,7 +8,7 @@ private:
 	sf::RenderWindow window;
 public:
 	Game();
-	Game(const int & windowWidth, const int & windowHeight, const sf::String & windowName);
+	Game(const int & windowWidth = 1024, const int & windowHeight = 768, const sf::String & windowName = "SFML GAME!");
 	~Game();
 	void run();
 
