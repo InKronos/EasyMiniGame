@@ -1,4 +1,4 @@
-#include "game.h"
+#include "stdafx.h"
 
 Game::Game()
 {
@@ -57,5 +57,3 @@ void Game::draw()
 	this->window.display();
 
 }
-
-

@@ -1,5 +1,4 @@
-#include "game.h"
-
+#include "stdafx.h"
 
 int main()
 {
