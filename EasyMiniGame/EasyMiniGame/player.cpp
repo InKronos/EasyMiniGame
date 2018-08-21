@@ -9,6 +9,7 @@ Player::Player(const sf::Vector2f & position, const sf::Vector2f& size)
 	: SceneObject(position, size)
 {
 	this->shape.setFillColor({ 255, 0, 0 });
+	this->playerSize = this->shape.getSize();
 }
 
 Player::~Player()
@@ -16,9 +17,20 @@ Player::~Player()
 	std::cout << "Player just got deleted!" << std::endl;
 }
 
-void Player::update(const float & deltaTime)
+void Player::update(const float & deltaTime, sf::RenderWindow& window)
 {
-	if (Game::isAPressed) 
+	this->playerMove(deltaTime, window);
+	this->playerCheckCollision(window);
+}
+
+const sf::Vector2f & Player::getSize()
+{
+	return this->playerSize;
+}
+
+void Player::playerMove(const float & deltaTime, sf::RenderWindow & window)
+{
+	if (Game::isAPressed)
 		this->position.x -= 50 * deltaTime;
 	if (Game::isDPressed)
 		this->position.x += 50 * deltaTime;
@@ -28,11 +40,14 @@ void Player::update(const float & deltaTime)
 
 void Player::playerCheckCollision(sf::RenderWindow& window)
 {
-	/*
-	if (this->position.x < 0)
+	if (this->position.x < this->shape.getSize().x/2)
 	{
-		this->position.x = 0;
+		this->position.x = this->shape.getSize().x/2;
 		this->shape.setPosition(this->position);
 	}
-	*/
+	if (this->position.x > window.getSize().x - this->shape.getSize().x / 2)
+	{
+		this->position.x = window.getSize().x - this->shape.getSize().x / 2;
+		this->shape.setPosition(this->position);
+	}
 }

@@ -3,7 +3,7 @@
 bool Game::isAPressed(0),
 	Game::isDPressed(0);
 
-Player player({50, 200});
+Player player({ 50, 200 });
 
 Game::Game()
 {
@@ -23,6 +23,8 @@ Game::~Game()
 
 void Game::run()
 {
+	player.setPosition({ 0, this->window.getSize().y - player.getSize().y / 2 });
+
 	sf::Clock gameClock;
 	float deltaTime = 1 / 60.f;
 	this->window.setFramerateLimit(30);
@@ -32,7 +34,7 @@ void Game::run()
 		float frameStart = gameClock.getElapsedTime().asSeconds();
 
 		events();
-		updateAll(deltaTime);
+		updateAll(deltaTime, this->window);
 		this->window.clear();
 		drawAll(this->window);
 		this->window.display();
@@ -82,13 +84,13 @@ void Game::events()
 
 }
 
-void Game::updateAll(const float & deltaTime)
+void Game::updateAll(const float & deltaTime, sf::RenderWindow& window)
 {
-	player.update(deltaTime);
+	player.update(deltaTime, window);
 }
 
 
 void Game::drawAll(sf::RenderWindow& window)
 {
-	player.draw(window);
+	player.draw(this->window);
 }

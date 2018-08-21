@@ -16,7 +16,7 @@ public:
 
 private:
 	void events();
-	void updateAll(const float & deltaTime);
+	void updateAll(const float & deltaTime, sf::RenderWindow& window);
 	void drawAll(sf::RenderWindow& window);
 
 };
