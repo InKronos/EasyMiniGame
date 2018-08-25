@@ -8,6 +8,8 @@ protected:
 	sf::RectangleShape shape;
 	sf::Vector2f position;
 public:
+	bool isDead;
+
 	SceneObject(const sf::Vector2f& position = { 0, 0 }, const sf::Vector2f& size = { 20, 20 });
 	~SceneObject() {};
 

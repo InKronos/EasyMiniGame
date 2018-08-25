@@ -19,8 +19,9 @@ Player::~Player()
 
 void Player::update(const float & deltaTime, sf::RenderWindow& window)
 {
-	this->playerMove(deltaTime, window);
-	this->playerCheckCollision(window);
+	this->playerMove(deltaTime);
+	this->WindowCheckCollision(window);
+	this->ObjectCollision();
 }
 
 const sf::Vector2f & Player::getSize()
@@ -28,17 +29,17 @@ const sf::Vector2f & Player::getSize()
 	return this->playerSize;
 }
 
-void Player::playerMove(const float & deltaTime, sf::RenderWindow & window)
+void Player::playerMove(const float & deltaTime)
 {
 	if (Game::isAPressed)
-		this->position.x -= 50 * deltaTime;
+		this->position.x -= 100 * deltaTime;
 	if (Game::isDPressed)
-		this->position.x += 50 * deltaTime;
+		this->position.x += 100 * deltaTime;
 
 	this->shape.setPosition(this->position);
 }
 
-void Player::playerCheckCollision(sf::RenderWindow& window)
+void Player::WindowCheckCollision(sf::RenderWindow& window)
 {
 	if (this->position.x < this->shape.getSize().x/2)
 	{
@@ -49,5 +50,21 @@ void Player::playerCheckCollision(sf::RenderWindow& window)
 	{
 		this->position.x = window.getSize().x - this->shape.getSize().x / 2;
 		this->shape.setPosition(this->position);
+	}
+}
+
+void Player::ObjectCollision()
+{
+	for (auto i = 0u; i < List::allFallingObject.size(); i++)
+	{
+		float dX = this->position.x - List::allFallingObject[i].getPosition().x;
+		float dY = this->position.y - List::allFallingObject[i].getPosition().y;
+
+		float length = sqrt(dX * dX + dY * dY);
+
+		if (length < 0 + this->shape.getSize().x) {
+			isDead = true;
+			std::cout << length << std::endl;
+		}
 	}
 }

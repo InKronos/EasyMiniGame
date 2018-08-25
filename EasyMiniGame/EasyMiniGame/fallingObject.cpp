@@ -3,24 +3,35 @@
 FallingObject::FallingObject(const sf::Vector2f & position, const sf::Vector2f & size)
 	: SceneObject(position, size)
 {
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(0, 255);
-	int r = distribution(generator);
-	int g = distribution(generator);
-	int b = distribution(generator);
+	srand(time(NULL));
 
-	this->shape.setFillColor({ 255, 0, 255 });
+	this->isDead = false;
+	this->shape.setFillColor(sf::Color( rand() % 255 + 100, rand() % 255 + 100, rand() % 255 + 100));
 }
 
 FallingObject::~FallingObject()
 {
-	std::cout << "Object is outside window";
+	std::cout << "Object is outside window" <<std::endl;
 }
 
-void FallingObject::update(const float & deltaTime)
+void FallingObject::update(const float & deltaTime, sf::RenderWindow& window)
 {
-	this->velY += deltaTime * 1.2;
+	this->fall(deltaTime);
+	this->destroy(window);
+}
+
+void FallingObject::fall(const float & deltaTime)
+{
+	srand(time(NULL));
+	this->velY += deltaTime * ((rand() % 1000) / 130) ;
 	this->position.y += this->velY * deltaTime;
 
 	this->shape.setPosition(this->position);
 }
+
+void FallingObject::destroy(sf::RenderWindow & window)
+{
+	if (this->position.y > (window.getSize().y + (this->shape.getSize().y / 2))) 
+		isDead = true;
+}
+

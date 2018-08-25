@@ -12,9 +12,12 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include <windows.h>
 
-#include "game.h"
 #include "SceneObject.h"
 #include "player.h"
 #include "fallingObject.h"
+#include "List.h"
+#include "game.h"
+
 

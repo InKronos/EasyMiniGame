@@ -12,10 +12,12 @@ public:
 	~Game();
 	void run();
 	static bool isAPressed,
-		isDPressed;
+		isDPressed,
+		isSpacePressed;
 
 private:
 	void events();
+	void spawner(sf::RenderWindow& window);
 	void updateAll(const float & deltaTime, sf::RenderWindow& window);
 	void drawAll(sf::RenderWindow& window);
 
