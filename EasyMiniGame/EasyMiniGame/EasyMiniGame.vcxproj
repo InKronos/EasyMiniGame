@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fallingObject.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fallingObject.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="SceneObject.h" />
